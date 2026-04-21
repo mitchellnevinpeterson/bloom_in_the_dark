@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom in the Dark | The Big Dance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09110f;
+      --panel: rgba(11, 22, 19, 0.75);
+      --panel-strong: rgba(8, 16, 14, 0.9);
+      --line: rgba(204, 224, 182, 0.26);
+      --mist: rgba(235, 248, 225, 0.78);
+      --text: #eff7e7;
+      --muted: #bfd0c2;
+      --sage: #90b08b;
+      --leaf: #588157;
+      --moon: #f0d9a1;
+      --rose: #d8a3a8;
+      --glow: #d1ebb0;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Outfit", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(98, 124, 84, 0.18), transparent 30%),
+        radial-gradient(circle at 20% 20%, rgba(201, 224, 179, 0.14), transparent 22%),
+        radial-gradient(circle at 80% 0%, rgba(255, 225, 168, 0.12), transparent 20%),
+        linear-gradient(180deg, rgba(3, 7, 7, 0.72), rgba(5, 9, 8, 0.9)),
+        url("bridgerton_flowerhall.jpg") center top / cover fixed no-repeat;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background:
+        radial-gradient(circle at 10% 30%, rgba(255, 244, 208, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 20%, rgba(197, 231, 181, 0.06), transparent 15%),
+        radial-gradient(circle at 40% 80%, rgba(164, 199, 151, 0.08), transparent 16%);
+      filter: blur(20px);
+    }
+
+    body::after {
+      background-image:
+        radial-gradient(circle, rgba(255, 246, 220, 0.65) 0 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(218, 239, 204, 0.4) 0 1px, transparent 1.8px);
+      background-position: 0 0, 24px 34px;
+      background-size: 120px 120px, 160px 160px;
+      opacity: 0.22;
+      mix-blend-mode: screen;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(6, 14, 12, 0.6);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, #fff6dd, #e2c978 45%, #577653 100%);
+      box-shadow: 0 0 30px rgba(237, 211, 138, 0.35);
+    }
+
+    .topbar-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .topbar-links a {
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy,
+    .hero-poster,
+    .card,
+    .timeline,
+    .memories-preview {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      padding: 36px;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      top: -120px;
+      right: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 225, 173, 0.32), transparent 65%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(231, 243, 213, 0.18);
+      border-radius: 999px;
+      background: rgba(236, 246, 225, 0.06);
+      color: var(--glow);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      line-height: 0.92;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      margin-bottom: 18px;
+      font-size: clamp(3.7rem, 9vw, 7.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .hero .subtitle {
+      max-width: 580px;
+      margin-bottom: 20px;
+      color: var(--mist);
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      line-height: 1.5;
+    }
+
+    .hero .lede {
+      max-width: 620px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .button,
+    .ghost-button,
+    .music-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+
+    .button {
+      color: #0d1713;
+      background: linear-gradient(135deg, #f2ddb0, #cfe39f);
+      box-shadow: 0 14px 36px rgba(215, 230, 168, 0.18);
+    }
+
+    .ghost-button,
+    .music-button {
+      color: var(--text);
+      border-color: rgba(233, 243, 220, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button:hover,
+    .ghost-button:hover,
+    .music-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(239, 246, 230, 0.05);
+      border: 1px solid rgba(238, 244, 225, 0.12);
+    }
+
+    .fact-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--sage);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .hero-poster {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      min-height: 100%;
+      background:
+        linear-gradient(180deg, rgba(11, 23, 20, 0.05), rgba(8, 15, 14, 0.75)),
+        rgba(11, 22, 19, 0.82);
+    }
+
+    .poster-image-wrap {
+      padding: 18px;
+    }
+
+    .poster-image {
+      display: block;
+      width: 100%;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    .poster-caption {
+      padding: 0 24px 24px;
+      color: var(--mist);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      padding: 28px;
+    }
+
+    .card h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(238, 245, 228, 0.06);
+      border: 1px solid rgba(238, 245, 228, 0.1);
+      color: var(--mist);
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .timeline h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid rgba(239, 246, 230, 0.08);
+    }
+
+    .timeline-row:first-of-type {
+      border-top: none;
+      padding-top: 6px;
+    }
+
+    .timeline-time {
+      color: var(--moon);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .timeline-copy strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+
+    .memories-preview {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .memories-copy {
+      padding: 30px;
+    }
+
+    .memories-copy h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+    }
+
+    .memories-copy p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .memory-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      min-height: 100%;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(247, 236, 207, 0.06), rgba(200, 229, 189, 0.04));
+    }
+
+    .memory-stack img {
+      width: 100%;
+      height: 100%;
+      min-height: 160px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .notice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 28px;
+    }
+
+    .mini-card {
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-card h3 {
+      margin-bottom: 12px;
+      font-size: 2rem;
+    }
+
+    .mini-card p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    footer {
+      padding: 30px 8px 0;
+      color: rgba(239, 247, 231, 0.72);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid,
+      .memories-preview,
+      .notice {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        border-radius: 30px;
+      }
+
+      .facts {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 20px, 1160px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+      }
+
+      .topbar-links {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero-copy,
+      .hero-poster,
+      .card,
+      .timeline,
+      .memories-copy,
+      .mini-card {
+        padding: 22px;
+      }
+
+      .poster-image-wrap,
+      .memory-stack {
+        padding: 12px;
+      }
+
+      .timeline-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="gardenWaltz" loop>
+    <source src="music5.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="page">
+    <nav class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>The Big Dance at Stanford</span>
+      </div>
+      <div class="topbar-links">
+        <a href="#details">Details</a>
+        <a href="#attire">Attire</a>
+        <a href="#memories">Memories</a>
+        <a href="photos.html">Photo Archive</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Moonlit Ballroom Season</div>
+        <h1>Bloom in the Dark</h1>
+        <p class="subtitle">A mystical night in the enchanted garden.</p>
+        <p class="lede">
+          The Big Dance returns on <strong>Friday, May 15, 2026</strong> for a twilight celebration of music,
+          romance, and after-hours wonder. Expect candlelit florals, midnight waltzes, and a ballroom that feels
+          like it opened somewhere between a dream and a secret garden.
+        </p>
+
+        <div class="cta-row">
+          <a class="button" href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu&subject=Bloom%20in%20the%20Dark%20updates">Get Event Updates</a>
+          <a class="ghost-button" href="#details">See the Evening</a>
+          <button class="music-button" id="musicToggle" type="button">Play Garden Waltz</button>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <span class="fact-label">Date</span>
+            <div class="fact-value">Friday, May 15, 2026</div>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Time</span>
+            <div class="fact-value">9:00 PM to 6:00 AM<br>Optional lesson at 8:00 PM</div>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Location</span>
+            <div class="fact-value">
+              <a href="https://maps.google.com/?q=375+Santa+Teresa+St,+Stanford,+CA+94305" target="_blank" rel="noopener noreferrer">
+                Roble Gym<br>375 Santa Teresa St, Stanford, CA
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-poster">
+        <div class="poster-image-wrap">
+          <img class="poster-image" src="Beige Modern Bold Cocktail Party Invitation (6).png" alt="Big Dance invitation art with a flower in a field">
+        </div>
+        <div class="poster-caption">
+          Save the date for a night where blossoms glow after dusk. This year trades daylight garden-party sweetness
+          for a richer, deeper atmosphere: velvet shadows, luminous florals, and dancing until dawn.
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid" id="details">
+      <article class="card">
+        <h2>The Invitation</h2>
+        <p>
+          Wander through an enchanted garden where moonlight catches on petals, chandeliers shimmer like stars,
+          and every room hums with the promise of one more song. The mood is romantic, theatrical, and just a
+          little mysterious.
+        </p>
+        <div class="pill-list">
+          <span class="pill">Luminous florals</span>
+          <span class="pill">Mystical garden glamour</span>
+          <span class="pill">Late-night social dancing</span>
+          <span class="pill">Soft-soled shoes only</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Tickets & Entry</h2>
+        <ul>
+          <li><strong>Stanford students:</strong> $10</li>
+          <li><strong>General public:</strong> $20</li>
+          <li><strong>Financial aid:</strong> Available upon request so no dancer is left out of the night.</li>
+        </ul>
+        <div class="cta-row" style="margin-top: 20px; margin-bottom: 0;">
+          <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdP19ANxBX0_qkFgt5tjRC3gRwKMjy9gO1ypP1lJ-sst-TMQw/viewform" target="_blank" rel="noopener noreferrer">Request Financial Aid</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="timeline">
+      <h2>Nightfall to Daybreak</h2>
+      <div class="timeline-row">
+        <div class="timeline-time">8:00 PM</div>
+        <div class="timeline-copy">
+          <strong>Optional Intermediate Cross-Step Waltz Lesson</strong>
+          Warm into the evening with a class before the ballroom opens in full.
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">9:00 PM</div>
+        <div class="timeline-copy">
+          <strong>Doors Open</strong>
+          Enter the garden, find your people, and step into a night of social dancing.
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">11:00 PM</div>
+        <div class="timeline-copy">
+          <strong>A Midnight Bloom Hour</strong>
+          A featured hour for especially dreamy partner dancing, dramatic lighting, and full enchanted-garden atmosphere.
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-time">Dawn</div>
+        <div class="timeline-copy">
+          <strong>Last Song at First Light</strong>
+          Stay through the final waltz and watch the night dissolve into morning.
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="attire">
+      <article class="card">
+        <h2>Dress the Part</h2>
+        <ul>
+          <li><strong>Moonlit Garden:</strong> rich florals, ivy details, shimmering textures, botanical embroidery, and after-dark romance.</li>
+          <li><strong>Regency Echoes:</strong> gowns, gloves, waistcoats, lace, and silhouettes that nod to the ballroom without feeling costume-bound.</li>
+          <li><strong>Come As You Are:</strong> festive attire is welcome at every level, from dramatic to simple and elegant.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Good to Know</h2>
+        <ul>
+          <li><strong>Shoes:</strong> wear soft-soled dance shoes or socks only inside Roble Gym.</li>
+          <li><strong>Volunteers:</strong> Stanford student volunteers can receive free admission.</li>
+          <li><strong>Questions:</strong> email the committee for ticketing, volunteering, or accessibility support.</li>
+        </ul>
+        <div class="cta-row" style="margin-top: 20px; margin-bottom: 0;">
+          <a class="ghost-button" href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu&subject=Bloom%20in%20the%20Dark%20volunteer">Volunteer for Free Entry</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="memories-preview" id="memories">
+      <div class="memories-copy">
+        <h2>The Big Dance Legacy</h2>
+        <p>
+          This night is brand new, but it belongs to a long tradition. The archive carries the history forward,
+          from early years in the nineties through decades of dancing, dressing up, and staying far too late with friends.
+        </p>
+        <p>
+          Browse the photo archive for a glimpse of past Big Dance eras, then imagine this year's enchanted garden
+          joining that story.
+        </p>
+        <a class="button" href="photos.html">Open the Photo Archive</a>
+      </div>
+      <div class="memory-stack">
+        <img src="2014.jpg" alt="Big Dance memory from 2014">
+        <img src="2009-full.jpg" alt="Big Dance memory from 2009">
+        <img src="2002_Dancing_3.jpg" alt="Big Dance memory from 2002">
+        <img src="1997.jpg" alt="Big Dance memory from 1997">
+      </div>
+    </section>
+
+    <section class="notice">
+      <article class="mini-card">
+        <h3>Committee Notes</h3>
+        <p>
+          Hosted by The Big Dance Committee and made possible by the Stanford dance community. If you want this page
+          to link directly to ticket sales later, we can drop the live ticket URL in as soon as it's ready.
+        </p>
+      </article>
+      <article class="mini-card">
+        <h3>Contact</h3>
+        <p>
+          Reach the organizers at
+          <a href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu">the Big Dance email list</a>
+          for event questions, volunteer signup, or help with financial aid.
+        </p>
+      </article>
+    </section>
+
+    <footer>
+      The Big Dance at Stanford University • Bloom in the Dark • Friday, May 15, 2026
+    </footer>
+  </main>
+
+  <script>
+    const music = document.getElementById("gardenWaltz");
+    const toggle = document.getElementById("musicToggle");
+
+    toggle.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          toggle.textContent = "Pause Garden Waltz";
+        } catch (error) {
+          toggle.textContent = "Tap Again to Play";
+        }
+      } else {
+        music.pause();
+        toggle.textContent = "Play Garden Waltz";
+      }
+    });
+  </script>
+</body>
+</html>

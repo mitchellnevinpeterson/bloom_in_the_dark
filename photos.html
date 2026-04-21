@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom in the Dark | Photo Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08110e;
+      --panel: rgba(10, 20, 17, 0.82);
+      --line: rgba(215, 235, 197, 0.16);
+      --text: #eff6e8;
+      --muted: #bfd0c2;
+      --sage: #9ab494;
+      --moon: #efd8a5;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Outfit", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(4, 8, 7, 0.7), rgba(4, 8, 7, 0.92)),
+        url("bridgerton_flowerhall.jpg") center top / cover fixed no-repeat;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 52px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .hero,
+    .stat-card,
+    .gallery-shell {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 30px;
+    }
+
+    .hero h1,
+    .stat-card h2 {
+      font-family: "Cormorant Garamond", serif;
+      line-height: 0.95;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      margin-bottom: 14px;
+      font-size: clamp(3rem, 7vw, 5.2rem);
+    }
+
+    .hero p {
+      max-width: 56ch;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.25s ease;
+    }
+
+    .button.primary {
+      color: #0b1411;
+      background: linear-gradient(135deg, #f2ddb0, #cfe39f);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      border: 1px solid rgba(239, 247, 231, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-card {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 28px;
+    }
+
+    .stat-card h2 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+    }
+
+    .stat-card p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .gallery-shell {
+      overflow: hidden;
+    }
+
+    .gallery-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(239, 247, 231, 0.08);
+    }
+
+    .gallery-heading h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    .gallery-heading span {
+      color: var(--sage);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .gallery {
+      columns: 4 220px;
+      column-gap: 16px;
+      padding: 18px;
+    }
+
+    figure {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(239, 247, 231, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 12px 14px 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 880px) {
+      .header {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 16px, 1180px);
+      }
+
+      .hero,
+      .stat-card {
+        padding: 22px;
+      }
+
+      .gallery-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px;
+      }
+
+      .gallery {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="header">
+      <div class="hero">
+        <h1>Photo Archive</h1>
+        <p>
+          A few decades of Big Dance memories, gathered into one moonlit gallery. This page keeps the history close
+          while the new enchanted-garden theme makes room for the next chapter on <strong>May 15, 2026</strong>.
+        </p>
+        <div class="link-row">
+          <a class="button primary" href="index.html">Back to the Invitation</a>
+          <a class="button secondary" href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu&subject=Big%20Dance%20photo%20archive">Share Missing Photos</a>
+        </div>
+      </div>
+      <aside class="stat-card">
+        <h2>1994 to 2014</h2>
+        <p>
+          From early snapshots to crowded dance floors, the archive traces the long-running warmth, formality,
+          and joy that make The Big Dance feel bigger than any one year.
+        </p>
+      </aside>
+    </section>
+
+    <section class="gallery-shell">
+      <div class="gallery-heading">
+        <h2>Moments from the Ballroom</h2>
+        <span>Past Years</span>
+      </div>
+      <div class="gallery">
+        <figure><img src="2014.jpg" alt="Big Dance 2014"><figcaption>2014</figcaption></figure>
+        <figure><img src="2013.jpg" alt="Big Dance 2013"><figcaption>2013</figcaption></figure>
+        <figure><img src="2012.jpg" alt="Big Dance 2012"><figcaption>2012</figcaption></figure>
+        <figure><img src="2011.jpg" alt="Big Dance 2011"><figcaption>2011</figcaption></figure>
+        <figure><img src="2010.jpg" alt="Big Dance 2010"><figcaption>2010</figcaption></figure>
+        <figure><img src="2009-full.jpg" alt="Big Dance 2009"><figcaption>2009</figcaption></figure>
+        <figure><img src="2008.jpg" alt="Big Dance 2008"><figcaption>2008</figcaption></figure>
+        <figure><img src="2007.jpg" alt="Big Dance 2007"><figcaption>2007</figcaption></figure>
+        <figure><img src="2006-full.jpg" alt="Big Dance 2006"><figcaption>2006</figcaption></figure>
+        <figure><img src="2003-full.jpg" alt="Big Dance 2003"><figcaption>2003</figcaption></figure>
+        <figure><img src="2002_Dancing_5.jpg" alt="Big Dance 2002 dancing"><figcaption>2002</figcaption></figure>
+        <figure><img src="2002_Dancing_4.jpg" alt="Big Dance 2002 dance floor"><figcaption>2002</figcaption></figure>
+        <figure><img src="2002_Dancing_3.jpg" alt="Big Dance 2002 formal dance"><figcaption>2002</figcaption></figure>
+        <figure><img src="2002_Dancing_2.jpg" alt="Big Dance 2002 candid"><figcaption>2002</figcaption></figure>
+        <figure><img src="2002_Dancing_1.jpg" alt="Big Dance 2002 crowd"><figcaption>2002</figcaption></figure>
+        <figure><img src="2002.jpg" alt="Big Dance 2002 portrait"><figcaption>2002</figcaption></figure>
+        <figure><img src="2001.jpg" alt="Big Dance 2001"><figcaption>2001</figcaption></figure>
+        <figure><img src="2000.jpg" alt="Big Dance 2000"><figcaption>2000</figcaption></figure>
+        <figure><img src="1997.jpg" alt="Big Dance 1997"><figcaption>1997</figcaption></figure>
+        <figure><img src="1994.jpg" alt="Big Dance 1994"><figcaption>1994</figcaption></figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
