@@ -43,7 +43,7 @@
         radial-gradient(circle at 20% 20%, rgba(201, 224, 179, 0.14), transparent 22%),
         radial-gradient(circle at 80% 0%, rgba(255, 225, 168, 0.12), transparent 20%),
         linear-gradient(180deg, rgba(3, 7, 7, 0.72), rgba(5, 9, 8, 0.9)),
-        url("bridgerton_flowerhall.jpg") center top / cover fixed no-repeat;
+        url("Magical_forest_(Unsplash).jpg") center top / cover fixed no-repeat;
       overflow-x: hidden;
     }
 
@@ -133,7 +133,7 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 1.25fr 0.9fr;
+      grid-template-columns: 1fr;
       gap: 28px;
       align-items: stretch;
       margin-bottom: 28px;
@@ -169,11 +169,13 @@
     }
 
     .eyebrow {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       padding: 10px 16px;
-      margin-bottom: 20px;
+      margin: 0 auto 20px auto;
+      width: fit-content;
       border: 1px solid rgba(231, 243, 213, 0.18);
       border-radius: 999px;
       background: rgba(236, 246, 225, 0.06);
@@ -192,22 +194,23 @@
     }
 
     .hero h1 {
-      max-width: 10ch;
+      max-width: 100ch;
       margin-bottom: 18px;
       font-size: clamp(3.7rem, 9vw, 7.3rem);
       letter-spacing: -0.04em;
+      text-align: center;
     }
 
     .hero .subtitle {
       max-width: 580px;
-      margin-bottom: 20px;
+      margin: 0 auto 20px auto;   /* centers the block */
       color: var(--mist);
       font-size: clamp(1.15rem, 2vw, 1.45rem);
+      text-align: center;
       line-height: 1.5;
     }
 
     .hero .lede {
-      max-width: 620px;
       margin-bottom: 30px;
       color: var(--muted);
       font-size: 1rem;
@@ -215,6 +218,8 @@
     }
 
     .cta-row {
+      align-items: center;
+      justify-content: center;
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
@@ -253,7 +258,7 @@
     .button:hover,
     .ghost-button:hover,
     .music-button:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .facts {
@@ -524,7 +529,7 @@
 </head>
 <body>
   <audio id="gardenWaltz" loop>
-    <source src="music5.mp3" type="audio/mpeg">
+    <source src="sunspellauditory-sky-gardens-waltz-135461.mp3" type="audio/mpeg">
   </audio>
 
   <main class="page">
@@ -543,109 +548,175 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">Moonlit Ballroom Season</div>
+        <div class="eyebrow">The 28th Annual Big Dance</div>
         <h1>Bloom in the Dark</h1>
         <p class="subtitle">A mystical night in the enchanted garden.</p>
         <p class="lede">
           The Big Dance returns on <strong>Friday, May 15, 2026</strong> for a twilight celebration of music,
-          romance, and after-hours wonder. Expect candlelit florals, midnight waltzes, and a ballroom that feels
+          dancing, and after-hours wonder. Expect candlelit florals, midnight waltzes, and a ballroom that feels
           like it opened somewhere between a dream and a secret garden.
         </p>
 
         <div class="cta-row">
-          <a class="button" href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu&subject=Bloom%20in%20the%20Dark%20updates">Get Event Updates</a>
-          <a class="ghost-button" href="#details">See the Evening</a>
+          <a class="button" href="Https://www.eventbrite.com" target="_blank" rel="noopener noreferrer">Get Tickets</a>
           <button class="music-button" id="musicToggle" type="button">Play Garden Waltz</button>
         </div>
 
-        <div class="facts">
-          <div class="fact">
-            <span class="fact-label">Date</span>
-            <div class="fact-value">Friday, May 15, 2026</div>
-          </div>
-          <div class="fact">
-            <span class="fact-label">Time</span>
-            <div class="fact-value">9:00 PM to 6:00 AM<br>Optional lesson at 8:00 PM</div>
-          </div>
-          <div class="fact">
-            <span class="fact-label">Location</span>
-            <div class="fact-value">
-              <a href="https://maps.google.com/?q=375+Santa+Teresa+St,+Stanford,+CA+94305" target="_blank" rel="noopener noreferrer">
-                Roble Gym<br>375 Santa Teresa St, Stanford, CA
-              </a>
-            </div>
+      <div class="facts">
+        <div class="fact">
+          <span class="fact-label">Date</span>
+          <div class="fact-value" style="text-align: center;">Friday, May 15, 2026</div>
+        </div>
+        
+        <div class="fact">
+          <span class="fact-label">Time</span>
+          <div class="fact-value" style="text-align: center;">9:00 PM to 6:00 AM<br>Optional lesson at 8:00 PM</div>
+        </div>
+        
+        <div class="fact">
+          <span class="fact-label">Location</span>
+          <div class="fact-value" style="text-align: center;">
+            <a href="https://maps.google.com/?q=375+Santa+Teresa+St,+Stanford,+CA+94305" target="_blank" rel="noopener noreferrer">
+              Roble Gym<br>375 Santa Teresa St, Stanford, CA
+            </a>
           </div>
         </div>
       </div>
-
-      <aside class="hero-poster">
-        <div class="poster-image-wrap">
-          <img class="poster-image" src="Beige Modern Bold Cocktail Party Invitation (6).png" alt="Big Dance invitation art with a flower in a field">
-        </div>
-        <div class="poster-caption">
-          Save the date for a night where blossoms glow after dusk. This year trades daylight garden-party sweetness
-          for a richer, deeper atmosphere: velvet shadows, luminous florals, and dancing until dawn.
-        </div>
-      </aside>
+      </div>
     </section>
 
     <section class="grid" id="details">
       <article class="card">
         <h2>The Invitation</h2>
         <p>
-          Wander through an enchanted garden where moonlight catches on petals, chandeliers shimmer like stars,
-          and every room hums with the promise of one more song. The mood is romantic, theatrical, and just a
-          little mysterious.
+          Wander through a botanical wonderland where chandeliers shimmer like constellations and every hall echoes with a different rhythm. For nearly three decades, the Big Dance has transformed our campus into a realm of mystery and magic. Join the 28th annual celebration of dance, discovery, and the spirit of the garden.
         </p>
         <div class="pill-list">
-          <span class="pill">Luminous florals</span>
+          <span class="pill">Botanical splendor</span>
           <span class="pill">Mystical garden glamour</span>
-          <span class="pill">Late-night social dancing</span>
+          <span class="pill">28 years of tradition</span>
           <span class="pill">Soft-soled shoes only</span>
         </div>
       </article>
 
       <article class="card">
-        <h2>Tickets & Entry</h2>
+        <h2>Tickets</h2>
         <ul>
-          <li><strong>Stanford students:</strong> $10</li>
-          <li><strong>General public:</strong> $20</li>
-          <li><strong>Financial aid:</strong> Available upon request so no dancer is left out of the night.</li>
+          <li><strong>Stanford students:</strong> $15</li>
+          <li><strong>General public:</strong> $30</li>
+          <li><strong>Financial aid:</strong> Available upon request for students.</li>
         </ul>
-        <div class="cta-row" style="margin-top: 20px; margin-bottom: 0;">
-          <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSdP19ANxBX0_qkFgt5tjRC3gRwKMjy9gO1ypP1lJ-sst-TMQw/viewform" target="_blank" rel="noopener noreferrer">Request Financial Aid</a>
+        <div class="cta-row" style="margin-top: 60px; margin-bottom: 0;">
+          <a class="ghost-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdP19ANxBX0_qkFgt5tjRC3gRwKMjy9gO1ypP1lJ-sst-TMQw/viewform" target="_blank" rel="noopener noreferrer">Request Financial Aid</a>
         </div>
       </article>
     </section>
 
-    <section class="timeline">
-      <h2>Nightfall to Daybreak</h2>
+   <section class="timeline">
+  <h2>Nightfall to Daybreak</h2>
+
+  <div class="timeline-row">
+    <div class="timeline-time">7:45 PM</div>
+    <div class="timeline-copy">
+      <strong>Check-in Opens</strong>
+      Arrive early to prepare for a night of botanical wonder.
+    </div>
+  </div>
+
       <div class="timeline-row">
         <div class="timeline-time">8:00 PM</div>
         <div class="timeline-copy">
-          <strong>Optional Intermediate Cross-Step Waltz Lesson</strong>
-          Warm into the evening with a class before the ballroom opens in full.
+          <strong>Beginner Cross-Step Waltz Lesson</strong>
+          Warm into the evening with a guided lesson before the main event begins.
         </div>
       </div>
+
       <div class="timeline-row">
         <div class="timeline-time">9:00 PM</div>
         <div class="timeline-copy">
-          <strong>Doors Open</strong>
-          Enter the garden, find your people, and step into a night of social dancing.
+          <strong>The Dance Starts</strong>
+          Doors open to the garden. Find your rhythm as the music begins.
         </div>
       </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">9:30 PM</div>
+        <div class="timeline-copy"><strong>Performance by Danse Libre</strong></div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">10:00 PM</div>
+        <div class="timeline-copy"><strong>Performance by the Stanford Salseros</strong></div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">10:30 PM</div>
+        <div class="timeline-copy">
+          <strong>Performances by Swingtime & Viennese Ball Opening</strong>
+        </div>
+      </div>
+
       <div class="timeline-row">
         <div class="timeline-time">11:00 PM</div>
         <div class="timeline-copy">
-          <strong>A Midnight Bloom Hour</strong>
-          A featured hour for especially dreamy partner dancing, dramatic lighting, and full enchanted-garden atmosphere.
+          <strong>Dance Card Hour</strong>
+          A storied tradition for meeting new partners throughout the ballroom.
         </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">11:50 PM</div>
+        <div class="timeline-copy">
+          <strong>Costume Contest</strong>
+          Celebrating the most creative transformations of the night.
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">Midnight</div>
+        <div class="timeline-copy"><strong>Midnight Photo</strong>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">1:00 AM</div>
+        <div class="timeline-copy"><strong>The Snowball Dance</strong></div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">2:00 AM</div>
+        <div class="timeline-copy">
+          <strong>Dance Game: Ice, Wind, Tree</strong>
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">3:00 AM</div>
+        <div class="timeline-copy"><strong>The Big Dance Video</strong></div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">4:00 AM</div>
+        <div class="timeline-copy"><strong>Dance Game: Cross-Step Goose</strong></div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">4:30 AM</div>
+        <div class="timeline-copy"><strong>Dance Game: Dance like a...</strong></div>
       </div>
       <div class="timeline-row">
         <div class="timeline-time">Dawn</div>
         <div class="timeline-copy">
-          <strong>Last Song at First Light</strong>
-          Stay through the final waltz and watch the night dissolve into morning.
+          <strong>The Dawn Mazurka</strong>
+          Dancing as the first silvery light breaks through the garden.
+        </div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-time">6:00 AM</div>
+        <div class="timeline-copy">
+          <strong>End & Breakfast</strong>
+          A 28-year tradition concludes with breakfast for the sun-seekers.
         </div>
       </div>
     </section>
@@ -653,22 +724,27 @@
     <section class="grid" id="attire">
       <article class="card">
         <h2>Dress the Part</h2>
+        <p>Celebrate the 28th Big Dance. You may arrive:</p>
+        
         <ul>
-          <li><strong>Moonlit Garden:</strong> rich florals, ivy details, shimmering textures, botanical embroidery, and after-dark romance.</li>
-          <li><strong>Regency Echoes:</strong> gowns, gloves, waistcoats, lace, and silhouettes that nod to the ballroom without feeling costume-bound.</li>
-          <li><strong>Come As You Are:</strong> festive attire is welcome at every level, from dramatic to simple and elegant.</li>
+          <break></break>
+          <li><strong>Botanical:</strong> Adorned in florals, greenery, or botanical accents.</li>
+          <li><strong>Whimsical:</strong> As a creature who dwells within the garden.</li>
+          <li><strong>Yourself:</strong> Festive attire is always welcome.</li>
+          <break></break>
         </ul>
+        <p><em>A costume contest will celebrate the most creative transformations.</em></p>
       </article>
 
       <article class="card">
         <h2>Good to Know</h2>
         <ul>
-          <li><strong>Shoes:</strong> wear soft-soled dance shoes or socks only inside Roble Gym.</li>
-          <li><strong>Volunteers:</strong> Stanford student volunteers can receive free admission.</li>
-          <li><strong>Questions:</strong> email the committee for ticketing, volunteering, or accessibility support.</li>
+          <li><strong>Footwear:</strong> Soft-soled dance shoes or socks only. No street shoes are allowed inside Roble Gym.</li>
+          <li><strong>Volunteers:</strong> Stanford student volunteers receive free admission.</li>
+          <li><strong>Questions:</strong> Email the committee for ticketing, volunteering, or accessibility support.</li>
         </ul>
         <div class="cta-row" style="margin-top: 20px; margin-bottom: 0;">
-          <a class="ghost-button" href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu&subject=Bloom%20in%20the%20Dark%20volunteer">Volunteer for Free Entry</a>
+          <a class="ghost-button" href="mailto:stanford.bigdance@gmail.com&subject=Big%20Dance%20Volunteer">Volunteer for Free Entry</a>
         </div>
       </article>
     </section>
@@ -696,17 +772,16 @@
 
     <section class="notice">
       <article class="mini-card">
-        <h3>Committee Notes</h3>
+        <h3>Special Thanks</h3>
         <p>
-          Hosted by The Big Dance Committee and made possible by the Stanford dance community. If you want this page
-          to link directly to ticket sales later, we can drop the live ticket URL in as soon as it's ready.
+          Thank you to our sponsors: Jay Wang, insert company, and anonymous. Thank you to Richard Powers for DJing. Thank you to the Stanford Department of Theatre and Performance Studies for making this possible.
         </p>
       </article>
       <article class="mini-card">
         <h3>Contact</h3>
         <p>
-          Reach the organizers at
-          <a href="mailto:lisdsj4@stanford.edu?cc=sdesai05@stanford.edu,mitch29@stanford.edu">the Big Dance email list</a>
+          Reach the organizers
+          <a href="mailto:stanford.bigdance@gmail.com">here</a>
           for event questions, volunteer signup, or help with financial aid.
         </p>
       </article>
