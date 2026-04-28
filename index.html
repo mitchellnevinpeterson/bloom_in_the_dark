@@ -12,7 +12,7 @@
       --bg: #09110f;
       --panel: rgba(11, 22, 19, 0.75);
       --panel-strong: rgba(8, 16, 14, 0.9);
-      --line: rgba(204, 224, 182, 0.26);
+      --line: rgba(86, 105, 67, 0.26);
       --mist: rgba(235, 248, 225, 0.78);
       --text: #eff7e7;
       --muted: #bfd0c2;
@@ -39,39 +39,9 @@
       font-family: "Outfit", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(98, 124, 84, 0.18), transparent 30%),
-        radial-gradient(circle at 20% 20%, rgba(201, 224, 179, 0.14), transparent 22%),
-        radial-gradient(circle at 80% 0%, rgba(255, 225, 168, 0.12), transparent 20%),
-        linear-gradient(180deg, rgba(3, 7, 7, 0.72), rgba(5, 9, 8, 0.9)),
-        url("Magical_forest_(Unsplash).jpg") center top / cover fixed no-repeat;
+        linear-gradient(180deg, rgba(3, 7, 7, 0.0), rgba(5, 9, 8, 0.5)),
+        url("free-photo-of-field-of-flowers-beneath-the-trees.jpeg") center top / cover fixed no-repeat;
       overflow-x: hidden;
-    }
-
-    body::before,
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    body::before {
-      background:
-        radial-gradient(circle at 10% 30%, rgba(255, 244, 208, 0.08), transparent 18%),
-        radial-gradient(circle at 85% 20%, rgba(197, 231, 181, 0.06), transparent 15%),
-        radial-gradient(circle at 40% 80%, rgba(164, 199, 151, 0.08), transparent 16%);
-      filter: blur(20px);
-    }
-
-    body::after {
-      background-image:
-        radial-gradient(circle, rgba(255, 246, 220, 0.65) 0 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(218, 239, 204, 0.4) 0 1px, transparent 1.8px);
-      background-position: 0 0, 24px 34px;
-      background-size: 120px 120px, 160px 160px;
-      opacity: 0.22;
-      mix-blend-mode: screen;
     }
 
     a {
@@ -165,7 +135,6 @@
       top: -120px;
       right: -80px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245, 225, 173, 0.32), transparent 65%);
     }
 
     .eyebrow {
@@ -405,6 +374,7 @@
       grid-template-columns: 1.05fr 0.95fr;
       gap: 0;
       overflow: hidden;
+      margin-bottom: 28px;
     }
 
     .memories-copy {
@@ -440,6 +410,81 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
+    /* ── Team Section ── */
+    .team-section {
+      margin-top: 28px;
+      padding: 36px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .team-section .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 600;
+      line-height: 0.92;
+      margin-bottom: 28px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .team-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 15px;
+      border-radius: 20px;
+      background: rgba(239, 246, 230, 0.05);
+      border: 1px solid rgba(238, 244, 225, 0.12);
+      transition: background 0.25s ease;
+    }
+
+    .team-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--moon);
+      background: rgba(240, 217, 161, 0.1);
+      border: 1px solid rgba(240, 217, 161, 0.2);
+    }
+
+    .team-info h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .team-role {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 8px;
+    }
+
+    .team-info p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
     .notice {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -451,7 +496,8 @@
       padding: 24px;
       border-radius: 24px;
       border: 1px solid var(--line);
-      background: var(--panel-strong);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
       box-shadow: var(--shadow);
     }
 
@@ -472,11 +518,14 @@
       font-size: 0.95rem;
     }
 
+    
+
     @media (max-width: 980px) {
       .hero,
       .grid,
       .memories-preview,
-      .notice {
+      .notice,
+      .team-grid {
         grid-template-columns: 1fr;
       }
 
@@ -770,11 +819,105 @@
       </div>
     </section>
 
+<section class="team-section" id="team">
+      <h2 class="section-title">The Gang of 13</h2>
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Samuel Desai</h3>
+            <span class="team-role">Co-Chair</span>
+          </div>
+        </article>
+
+          <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Lisbeth Tejada</h3>
+            <span class="team-role">Co-Chair</span>
+          </div>
+        </article>
+
+          <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Gabriana Barcelo</h3>
+            <span class="team-role">Game Design</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Adele Lau</h3>
+            <span class="team-role">Graphics and Marketing</span>
+          </div>
+        </article>
+
+          <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Rehman Hassan</h3>
+            <span class="team-role">Decor Design</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Rachel Chen</h3>
+            <span class="team-role">Decor Design</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Dulce Soto</h3>
+            <span class="team-role">Logistics</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Jessica Lou Dabandan</h3>
+            <span class="team-role">Logistics</span>
+          </div>
+        </article>
+
+       <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Eddy Hudson</h3>
+            <span class="team-role">Dance Video</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Ernestine Zou</h3>
+            <span class="team-role">Decor Design</span>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-icon">◈</div>
+          <div class="team-info">
+            <h3>Mitchell Peterson</h3>
+            <span class="team-role">Website Design and Logistics</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+    
     <section class="notice">
       <article class="mini-card">
         <h3>Special Thanks</h3>
         <p>
-          Thank you to our sponsors: Jay Wang, insert company, and anonymous. Thank you to Richard Powers for DJing. Thank you to the Stanford Department of Theatre and Performance Studies for making this possible.
+          Thank you to our sponsors: Jay Wang, Ernestine Zou, and Anonymous. Thank you to Richard Powers for DJing. Thank you to the Stanford Department of Theatre and Performance Studies for making this possible.
         </p>
       </article>
       <article class="mini-card">
